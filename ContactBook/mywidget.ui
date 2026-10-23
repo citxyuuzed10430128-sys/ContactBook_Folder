@@ -141,6 +141,19 @@
     <string>匯出</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="importButton">
+   <property name="geometry">
+    <rect>
+     <x>665</x>
+     <y>420</y>
+     <width>121</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>匯入</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

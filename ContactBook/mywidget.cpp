@@ -1,8 +1,8 @@
-#include "mywidget.h"
+﻿#include "mywidget.h"
 #include "ui_mywidget.h"
 #include <QFileDialog>
-//#include <QTextStream>
-//#include <QTableWidgetItem>
+#include <QTextStream>
+#include <QTableWidgetItem>
 #include <QFile>
 #include <QDebug>
 
@@ -61,4 +61,30 @@ void MyWidget::on_exportButton_clicked(){
         saveStr += "\n";
     }
     CbWrite(fileName, saveStr);
+}
+
+
+void MyWidget::on_importButton_clicked(){
+    QString fileName = QFileDialog::getOpenFileName(this, "匯入通訊錄", ".", "csv(*.csv);;text(*.txt)");
+    if(fileName.isEmpty()) return;              // 使用者按取消
+
+    QFile inFile(fileName);
+    if(!inFile.open(QFile::ReadOnly | QFile::Text)){
+        qDebug() << "Open File failed!";
+        return;
+    }
+    QTextStream in(&inFile);                    // disk-->inFile-->in-->data
+    while(!in.atEnd()){
+        QString line = in.readLine();           // 讀一行
+        if(line.trimmed().isEmpty()) continue;  // 跳過空行
+
+        QStringList fields = line.split(",");   // "A,B,C,D," → [A][B][C][D][""]
+        int row = ui->contactBook->rowCount();
+        ui->contactBook->insertRow(row);
+        for(int j = 0; j < 4; j++){             // 只取前 4 欄
+            QString text = (j < fields.size()) ? fields[j] : "";
+            ui->contactBook->setItem(row, j, new QTableWidgetItem(text));
+        }
+    }
+    inFile.close();
 }

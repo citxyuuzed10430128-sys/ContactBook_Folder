@@ -34,6 +34,7 @@ public:
     QLineEdit *lineEdit_4;
     QPushButton *insertButton;
     QPushButton *exportButton;
+    QPushButton *importButton;
 
     void setupUi(QWidget *MyWidget)
     {
@@ -73,6 +74,9 @@ public:
         exportButton = new QPushButton(MyWidget);
         exportButton->setObjectName("exportButton");
         exportButton->setGeometry(QRect(420, 500, 141, 51));
+        importButton = new QPushButton(MyWidget);
+        importButton->setObjectName("importButton");
+        importButton->setGeometry(QRect(665, 420, 121, 161));
 
         retranslateUi(MyWidget);
 
@@ -88,6 +92,7 @@ public:
         label_4->setText(QCoreApplication::translate("MyWidget", "\351\233\273\350\251\261", nullptr));
         insertButton->setText(QCoreApplication::translate("MyWidget", "\346\226\260\345\242\236", nullptr));
         exportButton->setText(QCoreApplication::translate("MyWidget", "\345\214\257\345\207\272", nullptr));
+        importButton->setText(QCoreApplication::translate("MyWidget", "\345\214\257\345\205\245", nullptr));
     } // retranslateUi
 
 };
